@@ -3,6 +3,7 @@ let humanChoice;
 let humanScore = 0;
 let computerScore = 0;
 let result;
+let noOfRounds;
 
 function getComputerChoice() {
     computerChoice= Math.random();
@@ -19,10 +20,12 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    humanChoice=prompt("What's your choice");
+    humanChoice=prompt("What's your choice (rock/paper/scissors)");
     return (humanChoice.toLowerCase());
 }
 
+noOfRounds = prompt("How many rounds do you wish to play?");
+noOfRounds = parseInt(noOfRounds, 10);
 
 function playRound(humanChoice, computerChoice) {
     if ((humanChoice==='rock' && computerChoice==='paper') || (humanChoice==='paper' && computerChoice==='scissors') || (humanChoice==='scissors' && computerChoice==='rock')) {
@@ -48,13 +51,22 @@ function playRound(humanChoice, computerChoice) {
 }
 
 
-for (let i=0; i<5; i++) {
+for (let i=0; i<noOfRounds; i++) {
     humanChoice = getHumanChoice();
     computerChoice = getComputerChoice();
     playRound(humanChoice, computerChoice);
 }
-
 console.log("Your score = " +humanScore);
 console.log("Computer's score = "+computerScore);
+
+if (humanScore>computerScore) {
+    console.log("You Win!");
+}
+else if (computerScore>humanScore) {
+    console.log("You Lose! Better luck next time")
+}
+else {
+    console.log("Its a tie!");
+}
 
  
