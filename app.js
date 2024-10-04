@@ -17,24 +17,27 @@ function getComputerChoice() {
     }
 }
 
-getComputerChoice();
-
 function getHumanChoice() {
     humanChoice=prompt("What's your choice");
     return (humanChoice.toLowerCase());
 }
 
+
 function playRound(humanChoice, computerChoice) {
     if ((humanChoice==='rock' && computerChoice==='paper') || (humanChoice==='paper' && computerChoice==='scissors') || (humanChoice==='scissors' && computerChoice==='rock')) {
-        console.log("You loose! "+ computerChoice +"beats "+ humanChoice );
+        console.log("You loose! "+ computerChoice +" beats "+ humanChoice );
     }
     else if ((computerChoice==='rock' && humanChoice==='paper') || (computerChoice==='paper' && humanChoice==='scissors') || (computerChoice==='scissors' && humanChoice==='rock')) {
-        console.log("You win! "+humanChoice+"beats "+computerChoice);
+        console.log("You win! "+humanChoice+" beats "+computerChoice);
     }
     else {
-        console.log("Round tied!")
+        console.log("Round tied!");
     }
+
 } 
 
+humanChoice = getHumanChoice();
+computerChoice = getComputerChoice();
+playRound(humanChoice, computerChoice);
 
  
