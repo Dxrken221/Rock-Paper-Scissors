@@ -4,14 +4,18 @@ let humanScore = 0;
 let computerScore = 0;
 let result;
 let noOfRounds;
+let displayResult = document.getElementById("result");
+let human_score = document.getElementById("human_score");
+let computer_score = document.getElementById("computer_score");
 
+//getting computer choice
 function getComputerChoice() {
-    computerChoice= Math.random();
+    computerChoice = Math.random();
 
-    if (computerChoice<0.33) {
+    if (computerChoice < 0.33) {
         return ("rock");
     }
-    else if (computerChoice>=0.33 && computerChoice<0.66) {
+    else if (computerChoice >= 0.33 && computerChoice < 0.66) {
         return ("paper");
     }
     else {
@@ -19,23 +23,24 @@ function getComputerChoice() {
     }
 }
 
-// function getHumanChoice() {
-//     humanChoice=prompt("What's your choice (rock/paper/scissors)");
-//     return (humanChoice.toLowerCase());
-// }
 
 //--------- button function ---------
 function rockFunction() {
-    humanChoice= "rock";
-    return humanChoice;
+    humanChoice = "rock";
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
 }
+
 function paperFunction() {
-    humanChoice= "paper";
-    return humanChoice;
+    humanChoice = "paper";
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
 }
+
 function scissorsFunction() {
-    humanChoice= "scissors";
-    return humanChoice;
+    humanChoice = "scissors";
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
 }
 
 const rock = document.querySelector("#rock");
@@ -47,51 +52,48 @@ paper.addEventListener("click", paperFunction);
 scissors.addEventListener("click", scissorsFunction);
 
 
+noOfRounds = prompt("What is the score limit that you wish to play?");
+noOfRounds = parseInt(noOfRounds, 10);
 
-// noOfRounds = prompt("How many rounds do you wish to play?");
-// noOfRounds = parseInt(noOfRounds, 10);
-
+//playing function and logic
 function playRound(humanChoice, computerChoice) {
-    if ((humanChoice==='rock' && computerChoice==='paper') || (humanChoice==='paper' && computerChoice==='scissors') || (humanChoice==='scissors' && computerChoice==='rock')) {
-        console.log("You loose! "+ computerChoice +" beats "+ humanChoice );
-        result = "loss"
+    // computerChoice = getComputerChoice();
+
+    console.log("Human choice: " + humanChoice);
+    console.log("Computer choice: " + computerChoice);
+
+    if ((humanChoice === 'rock' && computerChoice === 'paper') || (humanChoice === 'paper' && computerChoice === 'scissors') || (humanChoice === 'scissors' && computerChoice === 'rock')) {
+        displayResult.textContent = "You loose! " + computerChoice + " beats " + humanChoice;
+        computerScore += 1;
     }
-    else if ((computerChoice==='rock' && humanChoice==='paper') || (computerChoice==='paper' && humanChoice==='scissors') || (computerChoice==='scissors' && humanChoice==='rock')) {
-        console.log("You win! "+humanChoice+" beats "+computerChoice);
-        result = "win"
+    else if ((computerChoice === 'rock' && humanChoice === 'paper') || (computerChoice === 'paper' && humanChoice === 'scissors') || (computerChoice === 'scissors' && humanChoice === 'rock')) {
+        displayResult.textContent = "You win! " + humanChoice + " beats " + computerChoice;
+        humanScore += 1;
     }
     else {
-        console.log("Round tied!");
-        result = "draw"
+        displayResult.textContent = "Round tied!";
     }
-    if (result === "win"){
-        humanScore = humanScore + 1;
-        return humanScore;
+
+
+    human_score.textContent = humanScore;
+    computer_score.textContent = computerScore;
+
+    if (humanScore >= noOfRounds) {
+        alert("You win the game!");
+        resetGame();
+    } else if (computerScore >= noOfRounds) {
+        alert("You lose the game!");
+        resetGame();
     }
-    else if (result === "loss"){
-        computerScore = computerScore + 1;
-        return computerScore;
-    }
+
 }
 
 
-for (let i=0; i<noOfRounds; i++) {
+// Function to reset the game
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    human_score.textContent = humanScore;
+    computer_score.textContent = computerScore;
+    displayResult.textContent = "Game reset. Play again!";
 }
-humanChoice = getHumanChoice();
-computerChoice = getComputerChoice();
-playRound(humanChoice, computerChoice);
-
-console.log("Your score = " +humanScore);
-console.log("Computer's score = "+computerScore);
-
-if (humanScore>computerScore) {
-    console.log("You Win!");
-}
-else if (computerScore>humanScore) {
-    console.log("You Lose! Better luck next time")
-}
-else {
-    console.log("Its a tie!");
-}
-
- 
