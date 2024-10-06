@@ -19,13 +19,37 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    humanChoice=prompt("What's your choice (rock/paper/scissors)");
-    return (humanChoice.toLowerCase());
+// function getHumanChoice() {
+//     humanChoice=prompt("What's your choice (rock/paper/scissors)");
+//     return (humanChoice.toLowerCase());
+// }
+
+//--------- button function ---------
+function rockFunction() {
+    humanChoice= "rock";
+    return humanChoice;
+}
+function paperFunction() {
+    humanChoice= "paper";
+    return humanChoice;
+}
+function scissorsFunction() {
+    humanChoice= "scissors";
+    return humanChoice;
 }
 
-noOfRounds = prompt("How many rounds do you wish to play?");
-noOfRounds = parseInt(noOfRounds, 10);
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+rock.addEventListener("click", rockFunction);
+paper.addEventListener("click", paperFunction);
+scissors.addEventListener("click", scissorsFunction);
+
+
+
+// noOfRounds = prompt("How many rounds do you wish to play?");
+// noOfRounds = parseInt(noOfRounds, 10);
 
 function playRound(humanChoice, computerChoice) {
     if ((humanChoice==='rock' && computerChoice==='paper') || (humanChoice==='paper' && computerChoice==='scissors') || (humanChoice==='scissors' && computerChoice==='rock')) {
@@ -52,10 +76,11 @@ function playRound(humanChoice, computerChoice) {
 
 
 for (let i=0; i<noOfRounds; i++) {
-    humanChoice = getHumanChoice();
-    computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
 }
+humanChoice = getHumanChoice();
+computerChoice = getComputerChoice();
+playRound(humanChoice, computerChoice);
+
 console.log("Your score = " +humanScore);
 console.log("Computer's score = "+computerScore);
 
